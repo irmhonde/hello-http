@@ -3,13 +3,19 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 func main() {
 	port := 8080
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		_, err := w.Write([]byte("Hello, world!"))
+		name := strings.TrimPrefix(r.URL.Path, "/")
+		if len(name) == 0 {
+			name = "world"
+		}
+
+		_, err := w.Write([]byte(fmt.Sprintf("Hello, %s!", strings.Title(name))))
 		if err != nil {
 			panic(err)
 		}
