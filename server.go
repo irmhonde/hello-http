@@ -9,10 +9,18 @@ func main() {
 	port := 8080
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, world!"))
+		_, err := w.Write([]byte("Hello, world!"))
+		if err != nil {
+			panic(err)
+		}
 	})
 
-	fmt.Printf("listening on port %v", port)
+	_, err := fmt.Printf("listening on port %v", port)
+	if err != nil {
+		panic(err)
+	}
 
-	http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
+	if err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil); err != nil {
+		panic(err)
+	}
 }
