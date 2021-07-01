@@ -15,7 +15,7 @@ func main() {
 			name = "world"
 		}
 
-		_, err := w.Write([]byte(fmt.Sprintf("Hello, %s!", strings.Title(name))))
+		_, err := w.Write([]byte(fmt.Sprintf("Hello world, %s!", strings.Title(name))))
 		if err != nil {
 			panic(err)
 		}
